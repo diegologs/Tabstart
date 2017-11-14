@@ -1,11 +1,33 @@
 $(document).ready(function() {
   
-  $.get( "https://www.reddit.com/r/wallpaper/top/.json?count=20?sort=new", function( json ) {
+  
+  startTime();
+  
+  $.get( "https://www.reddit.com/r/wallpaper/top/.json?count=2?sort=new", function( json ) {
     var image = json.data.children[0].data.url;
-    $( ".bg" ).css("background", "linear-gradient( rgba(13, 29, 36, 0.65), rgba(15, 19, 20, 0.45)), url("+ image +")");  
+    $( ".bg" ).css("background", "linear-gradient( rgba(13, 29, 36, 0.55), rgba(15, 19, 20, 0.35)), url("+ image +")");  
+    $('.content').css('background', 'rgba(255, 255, 255, 0)');
     console.log( json.data.children[0].data.url );
   });
-
+  
+  
 
 });
+
+function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('clock').innerHTML =
+    h + ":" + m + ":" + s;
+    var t = setTimeout(startTime, 500);
+}
+
+function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+}
 

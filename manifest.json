@@ -1,4 +1,3 @@
-
 {
   "manifest_version": 2,
   "name": "Tabstart",
@@ -8,7 +7,8 @@
    "background": {
     "scripts": [
       "js/jquery.min.js"
-  ],
+    ]
+    },
   
   "content_scripts": [
     {
