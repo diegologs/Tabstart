@@ -5,7 +5,7 @@ $(document).ready(function() {
   
   $.get( "https://www.reddit.com/r/wallpaper/top/.json?count=2?sort=new", function( json ) {
     var image = json.data.children[0].data.url;
-    $( ".bg" ).css("background", "linear-gradient( rgba(13, 29, 36, 0.55), rgba(15, 19, 20, 0.35)), url("+ image +")");  
+    $( ".bg" ).css("background", "linear-gradient( rgba(0, 5, 20, 0.75), rgba(15, 19, 20, 0.15)), url("+ image +")");  
     $('.content').css('background', 'rgba(255, 255, 255, 0)');
     console.log( json.data.children[0].data.url );
   });
