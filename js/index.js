@@ -1,50 +1,52 @@
-$(document).ready(function() {
-  
-  
+$(document).ready(function () {
+
+
   startTime();
 
-
-  
-  $.get( "https://www.reddit.com/r/wallpaper/top/.json?count=2?sort=new", function( json ) {
+  $.get("https://www.reddit.com/r/wallpaper/top/.json?count=2?sort=new", function (json) {
     var image = json.data.children[0].data.url;
-    $( ".bg" ).css("background", "linear-gradient( rgba(0, 5, 20, 0.75), rgba(15, 19, 20, 0.15)), url("+ image +")");  
+    $(".bg").css("background", "linear-gradient( rgba(0, 5, 20, 0.75), rgba(15, 19, 20, 0.15)), url(" + image + ")");
     $('.content').css('background', 'rgba(255, 255, 255, 0)');
-    console.log( json.data.children[0].data.url );
+    console.log(json.data.children[0].data.url);
 
-  
-     
+
+
   });
 
 
-  chrome.topSites.get(get_most_visited_sites) 
-    
-  
+  chrome.topSites.get(get_most_visited_sites)
 
-  
-  
+
+
+
+
 
 });
 
 function startTime() {
-    var today = new Date();
-    var h = today.getHours();
-    var m = today.getMinutes();
-    var s = today.getSeconds();
-    m = checkTime(m);
-    s = checkTime(s);
-    document.getElementById('clock').innerHTML =
+  var today = new Date();
+  var h = today.getHours();
+  var m = today.getMinutes();
+  var s = today.getSeconds();
+  m = checkTime(m);
+  s = checkTime(s);
+  document.getElementById('clock').innerHTML =
     h + ":" + m + ":" + s;
-    var t = setTimeout(startTime, 500);
+  var t = setTimeout(startTime, 500);
 }
 
 function checkTime(i) {
-    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-    return i;
+  if (i < 10) {
+    i = "0" + i
+  }; // add zero in front of numbers < 10
+  return i;
 }
 
 function get_most_visited_sites(mostVisitedURLs) {
   var popupDiv = document.getElementById('mostVisited_div');
   var ol = popupDiv.appendChild(document.createElement('ul'));
+
+
 
   for (var i = 0; i < 5; i++) {
     var li = ol.appendChild(document.createElement('li'));
@@ -52,12 +54,13 @@ function get_most_visited_sites(mostVisitedURLs) {
     a.href = mostVisitedURLs[i].url;
     a.appendChild(document.createTextNode(mostVisitedURLs[i].title));
 
-   
+    if (mostVisitedURLs[i].title === 'Lavanda Del Patio') {
+      $("#mostVisited_div").append('<img src="https://lavandadelpatio.es/assets/images/logo.png" width="128" />');
+    } else {
+      $("#mostVisited_div").append('<img src="https://logo.clearbit.com/' + mostVisitedURLs[i].url + '?s=128" />');
+    }
 
-   
 
-    
-    
   }
 
 }
