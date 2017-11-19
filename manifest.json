@@ -10,16 +10,9 @@
     ]
     },
   
-  "content_scripts": [
-    {
-        "matches": ["http://*/*"],
-        "js": ["jquery.min.js"]
-    }
-  ],
+
   
-  "browser_action": {
-    "default_icon": "logo.png"
-  },
+
 
     "chrome_url_overrides": {
       "newtab": "index.html"
@@ -28,6 +21,7 @@
 
   "permissions": [
     "activeTab",
+    "topSites",
     "https://ajax.googleapis.com/",
     "geolocation"
   ]
