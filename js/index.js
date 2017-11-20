@@ -43,24 +43,38 @@ function checkTime(i) {
 }
 
 function get_most_visited_sites(mostVisitedURLs) {
-  var popupDiv = document.getElementById('mostVisited_div');
-  var ol = popupDiv.appendChild(document.createElement('ul'));
 
 
 
-  for (var i = 0; i < 5; i++) {
-    var li = ol.appendChild(document.createElement('li'));
-    var a = li.appendChild(document.createElement('a'));
-    a.href = mostVisitedURLs[i].url;
-    a.appendChild(document.createTextNode(mostVisitedURLs[i].title));
+  for (var i = 0; i < 6; i++) {
+
+    var image = new Image();
+    image.src = "https://logo.clearbit.com/" + mostVisitedURLs[i].url + "?s=100";
+
+
 
     if (mostVisitedURLs[i].title === 'Lavanda Del Patio') {
-      $("#mostVisited_div").append('<img src="https://lavandadelpatio.es/assets/images/logo.png" width="128" />');
+      $(".most_visited").append('<div class="col col-sm-2"><img src="https://lavandadelpatio.es/assets/images/logo.png" width="100" /><a href="' + mostVisitedURLs[i].url + '"><h5 class="link">' + mostVisitedURLs[i].title + '</h5></a></div>')
     } else {
-      $("#mostVisited_div").append('<img src="https://logo.clearbit.com/' + mostVisitedURLs[i].url + '?s=128" />');
+      if (image.width == 0) {
+        $(".most_visited").append('<div class="col col-sm-2"><div id="colorpad" style="width:100px;height:100px;background-color:#000"><h1 class="first_letter">'+mostVisitedURLs[i].title.charAt(0)+'</h1></div><a href="' + mostVisitedURLs[i].url + '"><h5 class="link">' + mostVisitedURLs[i].title + '</h5></a></div>')
+        $("#colorpad").css("background-color", getRandomColor());
+      } else {
+
+        $(".most_visited").append('<div class="col col-sm-2"><img src="https://logo.clearbit.com/' + mostVisitedURLs[i].url + '?s=100" /><a href="' + mostVisitedURLs[i].url + '"><h5 class="link">' + mostVisitedURLs[i].title + '</h5></a></div>')
+      }
     }
 
 
   }
 
+}
+
+function getRandomColor() {
+  var letters = '0123456789ABCDEF';
+  var color = '#';
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
 }
