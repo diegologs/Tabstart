@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Tabstart",
-  "version": "1.0",
+  "version": "1.2",
   "description": "New tab page change, by Frostq",
 
    "background": {
@@ -20,6 +20,7 @@
 
 
   "permissions": [
+    "history",
     "activeTab",
     "topSites",
     "https://ajax.googleapis.com/",

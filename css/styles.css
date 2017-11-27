@@ -5,7 +5,8 @@ body{
 
 .bg{
   height: 100vh;
-
+  background-size: cover;
+  background-position: center;
 }
 
 #colorpad{
@@ -63,4 +64,13 @@ body{
 
 #clock{
   text-align: center;
+}
+
+.fa-trash{
+  display: none;
+}
+
+.site:hover .fa-trash{
+  display: block;
+  color: red;
 }
