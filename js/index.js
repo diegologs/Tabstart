@@ -1,22 +1,11 @@
 $(document).ready(function () {
 
   startTime();
+  getWallpaper();
+  printSites();
 
 
 
-  $.get("https://www.reddit.com/r/wallpaper/top/.json?count=2?sort=new", function (json) {
-    var image = json.data.children[0].data.url;
-    $(".bg").css("background", "linear-gradient( rgba(0, 5, 20, 0.75), rgba(15, 19, 20, 0.15)), url(" + image + ")");
-    $(".bg").css("background-size", "cover");
-    $('.content').css('background', 'rgba(255, 255, 255, 0)');
-    console.log(json.data.children[0].data.url);
-
-
-
-  });
-
-
-  chrome.topSites.get(get_most_visited_sites);
   fetchIcon("https://www.di.fm");
 
 
@@ -41,7 +30,8 @@ var urlIconMap = {
   "keep.google.com": "gk",
   "inbox.google.com": "ix",
   "ello.co": "el",
-  "slack.com": "sk"
+  "slack.com": "sk",
+  "lavandadelpatio.es": "lv"
 }
 
 String.prototype.getPureDomain = function() {
@@ -83,21 +73,79 @@ function startTime() {
 function checkTime(i) {
   if (i < 10) {
     i = "0" + i
-  }; // add zero in front of numbers < 10
+  }; 
   return i;
 }
 
-function get_most_visited_sites(mostVisitedURLs) {
+function printSites(){
+  var site_icon;
+  var d = document;
+  var a;
+  var img;
+  var div;
 
-
-
-  for (var i = 0; i < 6; i++) {
-
-  
+  var sites = [
+    "twitter.com",
+    "reddit.com",
+    "youtube.com",
+    "digg.com",
+    "facebook.com",
+    "lavandadelpatio.es"
     
 
-  }
+  ]
 
+  sites.forEach(function(site){
+
+    site_icon = "";
+
+    if (urlIconMap.hasOwnProperty(site)) {
+      site_icon = urlIconMap[site]
+    }
+
+    if(site_icon){
+      site_icon = "/img/" + site_icon + ".png";
+    }
+
+    a = d.createElement("a");
+    a.href = "http://" + site;
+    a.className = "col col-sm-2";
+
+    img = d.createElement("img");
+    img.src = site_icon;
+    img.width = "110";
+    img.className = "site_img"
+
+    a.appendChild(img);
+
+    $(".most_visited").append(a);
+
+    console.log(img);
+
+
+
+
+
+  });
+
+ 
+
+
+}
+
+function getWallpaper(){
+
+  $.get("https://www.reddit.com/r/wallpaper/top/.json?count=2?sort=new", function (json) {
+    var image = json.data.children[0].data.url;
+    $(".bg").css("background", "linear-gradient( rgba(0, 5, 20, 0.75), rgba(15, 19, 20, 0.15)), url(" + image + ")");
+    $(".bg").css("background-size", "cover");
+    $('.content').css('background', 'rgba(255, 255, 255, 0)');
+   
+    // console.log(json.data.children[0].data.url);
+
+
+
+  });
 }
 
 function getRandomColor() {
@@ -161,4 +209,15 @@ function fetchIcon(url) {
 
     })
   }
+}
+
+
+String.prototype.getPureDomain = function() {
+  var temp = document.createElement("a")
+  temp.href = this
+
+  var val = temp.host
+  if (val.indexOf("www") === 0) val = val.substring(val.indexOf("www.") + "www.".length)
+
+  return val
 }

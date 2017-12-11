@@ -37,7 +37,7 @@ body{
 }
 
 .most_visited{
-  padding-top: 2%;
+  padding-top: 10%;
   
   text-align: center;
 }
@@ -64,6 +64,9 @@ body{
 
 #clock{
   text-align: center;
+  font-weight: 400;
+  padding-top: 40px;
+  font-size: 3em;
 }
 
 .fa-trash{
