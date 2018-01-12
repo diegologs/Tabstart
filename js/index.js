@@ -79,6 +79,9 @@ function settings_button(){
 
   $(".settings_icon").bind("click", function(e) {
     $(".addSite").toggle();
+    $("#overlay").toggle();
+    $(".settings_title").toggle();
+    $(".fa-trash").toggle();
   })
 }
 
@@ -128,14 +131,22 @@ function printSite(site){
     site_icon = "/img/" + site_icon + ".png";
     a = d.createElement("a");
     a.href = "http://" + site;
-    a.className = "col col-sm-2";
+    a.className = "col col-sm-2 site";
 
     img = d.createElement("img");
     img.src = site_icon;
     img.width = "110";
     img.className = "site_img"
 
+    trash = d.createElement("i");
+    trash.classList.add("fa");
+
+    trash.classList.add("fa-trash");
+    
+    trash.setAttribute("aria-hidden", "true");
+    
     a.appendChild(img);
+    a.appendChild(trash);
 
     $(".most_visited").append(a);
   }
