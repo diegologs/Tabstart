@@ -2,25 +2,22 @@ $(document).ready(function () {
 
   startTime();
   getWallpaper();
-  addSite("google.com");
   printSites();
 
-
-
-  fetchIcon("https://www.di.fm");
+  add_site_button();
+  settings_button();
 
 
 
 });
 
 var sites = [
-    "twitter.com",
-    "reddit.com",
-    "youtube.com",
-    "digg.com",
-    "facebook.com",
-    "lavandadelpatio.es"
-    
+  "twitter.com",
+  "reddit.com",
+  "youtube.com",
+  "google.com",
+  "facebook.com",
+  "lavandadelpatio.es",
 ]
 
 var urlIconMap = {
@@ -41,7 +38,8 @@ var urlIconMap = {
   "inbox.google.com": "ix",
   "ello.co": "el",
   "slack.com": "sk",
-  "lavandadelpatio.es": "lv"
+  "lavandadelpatio.es": "lv",
+  "google.es": "gg"
 }
 
 String.prototype.getPureDomain = function() {
@@ -66,7 +64,23 @@ var xhr = function(url, callback) {
   oReq.send()
 }
 
+function add_site_button(){
 
+  console.log("eeeee");
+  $(".add_site").bind("click", function(e) {
+    var site = $("#add_site_input").val(); 
+    console.log(site); 
+    addSite(site);
+
+  })
+}
+
+function settings_button(){
+
+  $(".settings_icon").bind("click", function(e) {
+    $(".addSite").toggle();
+  })
+}
 
 function startTime() {
   var today = new Date();
@@ -88,30 +102,30 @@ function checkTime(i) {
 }
 
 function addSite(site){
+
   sites.push(site);
-  console.log("eeeeeeeeeee");
+
+
+
+
+  printSite(site);
 }
 
-
-function printSites(){
+function printSite(site){
   var site_icon;
   var d = document;
   var a;
   var img;
   var div;
 
-  sites.forEach(function(site){
+  site_icon = "";
 
-    site_icon = "";
+  if (urlIconMap.hasOwnProperty(site)) {
+    site_icon = urlIconMap[site]
+  }
 
-    if (urlIconMap.hasOwnProperty(site)) {
-      site_icon = urlIconMap[site]
-    }
-
-    if(site_icon){
-      site_icon = "/img/" + site_icon + ".png";
-    }
-
+  if(site_icon){
+    site_icon = "/img/" + site_icon + ".png";
     a = d.createElement("a");
     a.href = "http://" + site;
     a.className = "col col-sm-2";
@@ -124,16 +138,43 @@ function printSites(){
     a.appendChild(img);
 
     $(".most_visited").append(a);
+  }
 
-    console.log(img);
+  else{
+
+    fetchIcon(site, function(icon) {
+      site_icon = icon;
 
 
+      a = d.createElement("a");
+      a.href = "http://" + site;
+      a.className = "col col-sm-2";
 
+      img = d.createElement("img");
+      img.src = site_icon;
+      img.width = "110";
+      img.className = "site_img"
+
+      a.appendChild(img);
+
+      $(".most_visited").append(a);
+
+
+    });
+  }
+
+
+}
+
+function printSites(){
+  sites.forEach(function(site){
+
+    printSite(site);
 
 
   });
 
- 
+
 
 
 }
@@ -145,7 +186,7 @@ function getWallpaper(){
     $(".bg").css("background", "linear-gradient( rgba(0, 5, 20, 0.75), rgba(15, 19, 20, 0.15)), url(" + image + ")");
     $(".bg").css("background-size", "cover");
     $('.content').css('background', 'rgba(255, 255, 255, 0)');
-   
+
     // console.log(json.data.children[0].data.url);
 
 
@@ -166,15 +207,15 @@ function delete_top_site(url_to_delete) {
 
   console.log(url_to_delete);
   chrome.history.deleteUrl({url: url_to_delete});
-  
+
 }
 
 
-function fetchIcon(url) {
+function fetchIcon(url, _callback) {
   var presetMatchedId
   let parser;
   let doc;
-  
+
 
   if (urlIconMap.hasOwnProperty(url.getPureDomain())) {
     presetMatchedId = urlIconMap[url.getPureDomain()]
@@ -211,6 +252,7 @@ function fetchIcon(url) {
       }
 
       console.log(icon);
+      return _callback(icon);
 
     })
   }
