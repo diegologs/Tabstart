@@ -64,9 +64,9 @@ body{
 
 #clock{
   text-align: center;
-  font-weight: 400;
+  font-weight: 500;
   padding-top: 40px;
-  font-size: 3em;
+  font-size: 4em;
 }
 
 .fa-trash{

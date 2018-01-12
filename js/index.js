@@ -2,6 +2,7 @@ $(document).ready(function () {
 
   startTime();
   getWallpaper();
+  addSite("google.com");
   printSites();
 
 
@@ -10,8 +11,17 @@ $(document).ready(function () {
 
 
 
-
 });
+
+var sites = [
+    "twitter.com",
+    "reddit.com",
+    "youtube.com",
+    "digg.com",
+    "facebook.com",
+    "lavandadelpatio.es"
+    
+]
 
 var urlIconMap = {
   "facebook.com": "fb",
@@ -77,23 +87,18 @@ function checkTime(i) {
   return i;
 }
 
+function addSite(site){
+  sites.push(site);
+  console.log("eeeeeeeeeee");
+}
+
+
 function printSites(){
   var site_icon;
   var d = document;
   var a;
   var img;
   var div;
-
-  var sites = [
-    "twitter.com",
-    "reddit.com",
-    "youtube.com",
-    "digg.com",
-    "facebook.com",
-    "lavandadelpatio.es"
-    
-
-  ]
 
   sites.forEach(function(site){
 
