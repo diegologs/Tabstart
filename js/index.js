@@ -66,11 +66,18 @@ var xhr = function(url, callback) {
 
 function add_site_button(){
 
-  console.log("eeeee");
   $(".add_site").bind("click", function(e) {
     var site = $("#add_site_input").val(); 
     console.log(site); 
     addSite(site);
+
+  })
+}
+
+function delete_sitte_button(){
+  $(".add_site").bind("click", function(e) {
+    var site = $("#add_site_input").val(); 
+    deleteSite(site);
 
   })
 }
@@ -112,6 +119,12 @@ function addSite(site){
 
 
   printSite(site);
+}
+
+function deleteSite(index){
+  if (index > -1) {
+    sites.splice(index, 1);
+  }
 }
 
 function printSite(site){
