@@ -6,7 +6,7 @@ $(document).ready(function () {
 
   add_site_button();
   settings_button();
-
+  delete_sitte_button();
 
 
 });
@@ -75,9 +75,10 @@ function add_site_button(){
 }
 
 function delete_sitte_button(){
-  $(".add_site").bind("click", function(e) {
-    var site = $("#add_site_input").val(); 
-    deleteSite(site);
+  var delete_button = $(".fa-trash").bind("click", function(e) {
+    var index = delete_button.attr('id');
+    console.log(index);
+    deleteSite(index);
 
   })
 }
@@ -125,6 +126,8 @@ function deleteSite(index){
   if (index > -1) {
     sites.splice(index, 1);
   }
+
+  refreshSites();
 }
 
 function printSite(site){
@@ -143,8 +146,9 @@ function printSite(site){
   if(site_icon){
     site_icon = "/img/" + site_icon + ".png";
     a = d.createElement("a");
+    div = d.createElement("div");
     a.href = "http://" + site;
-    a.className = "col col-sm-2 site";
+    div.className = "col col-sm-2 site";
 
     img = d.createElement("img");
     img.src = site_icon;
@@ -156,12 +160,16 @@ function printSite(site){
 
     trash.classList.add("fa-trash");
     
+    trash.setAttribute('id', 1);
+
     trash.setAttribute("aria-hidden", "true");
     
     a.appendChild(img);
-    a.appendChild(trash);
+    div.appendChild(a);
+    div.appendChild(trash);
+    
 
-    $(".most_visited").append(a);
+    $(".most_visited").append(div);
   }
 
   else{
@@ -200,6 +208,13 @@ function printSites(){
 
 
 
+
+}
+
+function refreshSites(){
+
+    $(".most_visited").empty();
+  printSites();
 
 }
 
