@@ -2,6 +2,8 @@ $(document).ready(function () {
 
   startTime();
   getWallpaper();
+
+  getStoredSites();
   printSites();
 
   add_site_button();
@@ -64,6 +66,13 @@ var xhr = function(url, callback) {
   oReq.send()
 }
 
+function getStoredSites(){
+  var stored_sites = JSON.parse(localStorage.getItem("sites"));
+  if (stored_sites){
+      sites = stored_sites;
+  }
+}
+
 function add_site_button(){
 
   $(".add_site").bind("click", function(e) {
@@ -119,6 +128,7 @@ function delete_sitte_button(){
   function addSite(site){
 
     sites.push(site);
+    localStorage.setItem("sites", JSON.stringify(sites));
     printSite(site);
   }
 
@@ -127,6 +137,7 @@ function delete_sitte_button(){
       sites.splice(index, 1);
     }
 
+    localStorage.setItem("sites", JSON.stringify(sites));
     refreshSites();
   }
 
