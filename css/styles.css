@@ -61,8 +61,8 @@ body{
   text-align: center;
 }
 
-.most_visited a{
-  margin-top: 35px;
+.site{
+  margin-top: 40px;
 }
 
 
@@ -112,7 +112,6 @@ body{
 }
 
 .fa-trash{
-  display: none;
   color: red;
   position: absolute;
   left: 50%;

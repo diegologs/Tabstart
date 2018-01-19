@@ -119,10 +119,6 @@ function delete_sitte_button(){
   function addSite(site){
 
     sites.push(site);
-
-
-
-
     printSite(site);
   }
 
@@ -141,6 +137,7 @@ function delete_sitte_button(){
     var img;
     var div;
     var index;
+    var trash;
 
     site_icon = "";
 
@@ -168,7 +165,8 @@ function delete_sitte_button(){
       index = sites.indexOf(site);
       trash.setAttribute('id', index);
 
-      trash.setAttribute("aria-hidden", "true");
+      trash.style.display = 'none';
+      trash.setAttribute("aria-hidden", "true");  
 
       a.appendChild(img);
       div.appendChild(a);
@@ -182,20 +180,32 @@ function delete_sitte_button(){
 
       fetchIcon(site, function(icon) {
         site_icon = icon;
+      a = d.createElement("a");
+      div = d.createElement("div");
+      a.href = "http://" + site;
+      div.className = "col col-sm-2 site";
+
+      img = d.createElement("img");
+      img.src = site_icon;
+      img.width = "110";
+      img.className = "site_img"
+
+      trash = d.createElement("i");
+      trash.classList.add("fa");
+
+      trash.classList.add("fa-trash");
+
+      index = sites.indexOf(site);
+      trash.setAttribute('id', index);
+      trash.style.display = 'inline';
+      trash.setAttribute("aria-hidden", "true");  
+
+      a.appendChild(img);
+      div.appendChild(a);
+      div.appendChild(trash);
 
 
-        a = d.createElement("a");
-        a.href = "http://" + site;
-        a.className = "col col-sm-2";
-
-        img = d.createElement("img");
-        img.src = site_icon;
-        img.width = "110";
-        img.className = "site_img"
-
-        a.appendChild(img);
-
-        $(".most_visited").append(a);
+      $(".most_visited").append(div);
 
 
       });
