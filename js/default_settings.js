@@ -1,8 +1,8 @@
 var default_sites = [
-  "twitter.com",
-  "reddit.com",
-  "youtube.com",
-  "google.com",
-  "facebook.com",
-  "lavandadelpatio.es",
+  "https://www.twitter.com",
+  "https://www.reddit.com",
+  "https://www.youtube.com",
+  "https://www.google.com",
+  "https://www.facebook.com",
+  "https://www.lavandadelpatio.es",
 ]

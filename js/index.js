@@ -20,25 +20,25 @@ var settings = false;
 var sites = default_sites.slice();
 
 var urlIconMap = {
-  "facebook.com": "fb",
-  "plus.google.com": "gp",
-  "youtube.com": "yt",
-  "9gag.com": "ng",
-  "mail.google.com": "gmail",
-  "reddit.com": "rd",
-  "google.com": "gg",
-  "yahoo.com": "yh",
-  "drive.google.com": "gd",
-  "digg.com": "dg",
-  "theverge.com": "vg",
-  "twitter.com": "tw",
-  "getpocket.com": "pk",
-  "keep.google.com": "gk",
-  "inbox.google.com": "ix",
-  "ello.co": "el",
-  "slack.com": "sk",
-  "lavandadelpatio.es": "lv",
-  "google.es": "gg"
+  "https://www.facebook.com": "fb",
+  "https://www.plus.google.com": "gp",
+  "https://www.youtube.com": "yt",
+  "https://www.9gag.com": "ng",
+  "https://www.mail.google.com": "gmail",
+  "https://www.reddit.com": "rd",
+  "https://www.google.com": "gg",
+  "https://www.yahoo.com": "yh",
+  "https://www.drive.google.com": "gd",
+  "https://www.digg.com": "dg",
+  "https://www.theverge.com": "vg",
+  "https://www.twitter.com": "tw",
+  "https://www.getpocket.com": "pk",
+  "https://www.keep.google.com": "gk",
+  "https://www.inbox.google.com": "ix",
+  "https://www.ello.co": "el",
+  "https://www.slack.com": "sk",
+  "https://www.lavandadelpatio.es": "lv",
+  "https://www.google.es": "gg"
 }
 
 String.prototype.getPureDomain = function() {
@@ -93,6 +93,7 @@ function default_site_button(){
      refreshSites();
     localStorage.setItem("sites", JSON.stringify(sites));
     console.log("Default settings have been restored");
+    delete_sitte_button();
   })
 }
 
@@ -185,7 +186,7 @@ function printSite(site){
     site_icon = "/img/" + site_icon + ".png";
     a = d.createElement("a");
     div = d.createElement("div");
-    a.href = "http://" + site;
+    a.href = site;
     div.className = "col col-sm-2 site";
 
     img = d.createElement("img");
@@ -224,7 +225,7 @@ function printSite(site){
       site_icon = icon;
       a = d.createElement("a");
       div = d.createElement("div");
-      a.href = "http://" + site;
+      a.href = site;
       div.className = "col col-sm-2 site";
 
       img = d.createElement("img");
