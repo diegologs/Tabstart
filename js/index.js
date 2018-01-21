@@ -78,6 +78,7 @@ function default_site_button(){
 
 
 function delete_sitte_button(){
+  
   var delete_button = document.getElementsByClassName("fa-trash");
   for (i = 0; i < delete_button.length; i++) {
     delete_button[i].onclick = function(e) {
@@ -144,6 +145,7 @@ function deleteSite(index){
   if (index > -1) {
     sites.splice(index, 1);
   }
+
   localStorage.setItem("sites", JSON.stringify(sites));
   refreshSites();
 }
@@ -237,7 +239,9 @@ function printSite(site){
 
 
       $(".most_visited").append(div);
+      
 
+      delete_sitte_button();
 
     });
   }
