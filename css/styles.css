@@ -19,6 +19,29 @@ body{
   font-size: 4em;
 }
 
+.github{
+  display: none;
+  position: absolute;
+  bottom: 4%;
+  right: 5%;
+  z-index: 100;
+  color: white;
+
+}
+
+.author{
+  display: none;
+  position: absolute;
+  bottom: 9%;
+  right: 5%;
+  z-index: 100;
+  color: white;
+}
+
+.github i{
+  padding-left: 10px;
+}
+
 .settings_title{
   display: none;
   position: absolute;

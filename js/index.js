@@ -19,27 +19,6 @@ var settings = false;
 
 var sites = default_sites.slice();
 
-var urlIconMap = {
-  "https://www.facebook.com": "fb",
-  "https://www.plus.google.com": "gp",
-  "https://www.youtube.com": "yt",
-  "https://www.9gag.com": "ng",
-  "https://www.mail.google.com": "gmail",
-  "https://www.reddit.com": "rd",
-  "https://www.google.com": "gg",
-  "https://www.yahoo.com": "yh",
-  "https://www.drive.google.com": "gd",
-  "https://www.digg.com": "dg",
-  "https://www.theverge.com": "vg",
-  "https://www.twitter.com": "tw",
-  "https://www.getpocket.com": "pk",
-  "https://www.keep.google.com": "gk",
-  "https://www.inbox.google.com": "ix",
-  "https://www.ello.co": "el",
-  "https://www.slack.com": "sk",
-  "https://www.lavandadelpatio.es": "lv",
-  "https://www.google.es": "gg"
-}
 
 String.prototype.getPureDomain = function() {
   var temp = document.createElement("a")
@@ -117,6 +96,8 @@ function settings_button(){
     $(".settings_title").toggle();
     $(".default_settings").toggle();
     $(".fa-trash").toggle();
+    $(".author").toggle();
+    $(".github").toggle();
 
     if (settings){
       settings = false;
@@ -283,7 +264,7 @@ function getWallpaper(){
 
   $.get("https://www.reddit.com/r/wallpaper/top/.json?count=2?sort=new", function (json) {
     var image = json.data.children[0].data.url;
-    $(".bg").css("background", "linear-gradient( rgba(0, 5, 20, 0.75), rgba(15, 19, 20, 0.15)), url(" + image + ")");
+    $(".bg").css("background", "linear-gradient( rgba(0, 5, 30, 0.75), rgba(15, 19, 30, 0.25)), url(" + image + ")");
     $(".bg").css("background-size", "cover");
     $('.content').css('background', 'rgba(255, 255, 255, 0)');
 
