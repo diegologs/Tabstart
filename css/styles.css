@@ -27,6 +27,14 @@ body{
   z-index: 100;
 }
 
+.default_settings{
+  display: none;
+  position: absolute;
+  bottom: 5%;
+  left: 5%;
+  z-index: 100;
+}
+
 #overlay {
   background-color: rgba(0,0,0,0.75);
   position:fixed;

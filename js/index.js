@@ -9,6 +9,7 @@ $(document).ready(function () {
 
   add_site_button();
   settings_button();
+  default_site_button();
   delete_sitte_button();
 
 
@@ -16,14 +17,7 @@ $(document).ready(function () {
 
 var settings = false;
 
-var sites = [
-  "twitter.com",
-  "reddit.com",
-  "youtube.com",
-  "google.com",
-  "facebook.com",
-  "lavandadelpatio.es",
-]
+var sites = default_sites.slice();
 
 var urlIconMap = {
   "facebook.com": "fb",
@@ -90,14 +84,26 @@ function add_site_button(){
   })
 }
 
+
+function default_site_button(){
+  
+  $(".default_settings").bind("click", function(e) {
+     console.log("Reseting to default settings...."); 
+     sites = default_sites.slice();
+     refreshSites();
+    localStorage.setItem("sites", JSON.stringify(sites));
+    console.log("Default settings have been restored");
+  })
+}
+
+
 function delete_sitte_button(){
   var delete_button = document.getElementsByClassName("fa-trash");
   for (i = 0; i < delete_button.length; i++) {
     delete_button[i].onclick = function(e) {
       var index = e.target.id;
       deleteSite(index);
-      $(".fa-trash").toggle();
-
+      delete_sitte_button();
     }
   }
 }
@@ -108,6 +114,7 @@ function settings_button(){
     $(".addSite").toggle();
     $("#overlay").toggle();
     $(".settings_title").toggle();
+    $(".default_settings").toggle();
     $(".fa-trash").toggle();
 
     if (settings){
@@ -253,7 +260,6 @@ function printSite(site){
     });
   }
 
-  delete_sitte_button();
 }
 
 function printSites(){
