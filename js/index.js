@@ -56,6 +56,7 @@ function getStoredSites(callback){
   }
 
   console.log(sites);
+  console.log(urlIconMap);
 
   callback();
 
@@ -140,6 +141,7 @@ function checkTime(i) {
 
 function addSite(site){
 
+  var icon_aux;
 
   if (site.startsWith("http://")){
     site = site.slice(7);
@@ -160,13 +162,25 @@ function addSite(site){
 
   if (!urlIconMap.hasOwnProperty(site)) {
   
-    fetchIcon(site, function(icon) {
+    fetchIcon(site, function(icon_aux) {
+     
+      console.log(icon_aux);
 
-      urlIconMap[site] = icon;
-      localStorage.setItem("icons", JSON.stringify(urlIconMap));
+     
+     urlIconMap[site] = icon_aux;
+     localStorage.setItem("icons", JSON.stringify(urlIconMap));
+     refreshSites();
 
     });
   }
+   
+  
+    if (!icon_aux){
+        
+         urlIconMap[site] = getIcon(site); 
+         localStorage.setItem("icons", JSON.stringify(urlIconMap)); 
+      }
+      
       sites.push(site);
       console.log("Added:  "+site);
       localStorage.setItem("sites", JSON.stringify(sites));
@@ -304,6 +318,11 @@ function refreshSites(){
 
 }
 
+function getIcon(site){
+    return "https://logo.clearbit.com/" + site + "?s=200"
+}
+
+
 function getWallpaper(){
 
   $.get("https://www.reddit.com/r/wallpaper/top/.json?count=2?sort=new", function (json) {
@@ -353,6 +372,7 @@ function fetchIcon(url, _callback) {
       parser = new DOMParser()
       doc = parser.parseFromString(r, "text/html")
 
+      var icon = URI("favicon.ico").absoluteTo(url).toString()
       var linkTags = doc.getElementsByTagName("link")
       var icons = [].slice.call(linkTags).filter(function(tag) {
         var attrRel = tag.getAttribute("rel")
@@ -369,7 +389,6 @@ function fetchIcon(url, _callback) {
         return 0
       })
 
-      var icon = URI("favicon.ico").absoluteTo(url).toString()
       if (icons.length > 0) {
         var iconElem = icons[0]
         var iconHrefAttr = iconElem.getAttribute("href")
