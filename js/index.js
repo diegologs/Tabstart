@@ -130,10 +130,25 @@ function checkTime(i) {
 
 function addSite(site){
 
+  
+  
+  if (site.startsWith("http://")){
+    site = site.slice(7);
+  }
+
+  if (site.startsWith("https://")){
+    site = site.slice(8);
+  }
+
+  if (site.startsWith("www.")){
+    site = site.slice(4);
+  }
+
   if (!site.startsWith("www.") && !site.startsWith("https://"))
-{
-site = 'https://www.' + site;
-}
+  {
+    site = 'https://www.' + site;
+  }
+
   sites.push(site);
   localStorage.setItem("sites", JSON.stringify(sites));
   console.log(site);
