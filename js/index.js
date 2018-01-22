@@ -19,6 +19,7 @@ var settings = false;
 
 var sites = default_sites.slice();
 
+var urlIconMap = jQuery.extend(true, {}, default_icons);
 
 String.prototype.getPureDomain = function() {
   var temp = document.createElement("a")
@@ -44,8 +45,14 @@ var xhr = function(url, callback) {
 
 function getStoredSites(callback){
   var stored_sites = JSON.parse(localStorage.getItem("sites"));
+  var stored_icons = JSON.parse(localStorage.getItem("icons"));
+
   if (stored_sites){
     sites = stored_sites;
+  }
+
+  if (stored_icons){
+    urlIconMap = stored_icons;
   }
 
   console.log(sites);
@@ -65,12 +72,15 @@ function add_site_button(){
 
 
 function default_site_button(){
-  
+
   $(".default_settings").bind("click", function(e) {
-     console.log("Reseting to default settings...."); 
-     sites = default_sites.slice();
-     refreshSites();
+    console.log("Reseting to default settings...."); 
+    sites = default_sites.slice();
+     
+    urlIconMap = jQuery.extend(true, {}, default_icons);
+    refreshSites();
     localStorage.setItem("sites", JSON.stringify(sites));
+    localStorage.setItem("icons", JSON.stringify(urlIconMap));
     console.log("Default settings have been restored");
     delete_sitte_button();
   })
@@ -78,7 +88,7 @@ function default_site_button(){
 
 
 function delete_sitte_button(){
-  
+
   var delete_button = document.getElementsByClassName("fa-trash");
   for (i = 0; i < delete_button.length; i++) {
     delete_button[i].onclick = function(e) {
@@ -130,8 +140,7 @@ function checkTime(i) {
 
 function addSite(site){
 
-  
-  
+
   if (site.startsWith("http://")){
     site = site.slice(7);
   }
@@ -149,11 +158,23 @@ function addSite(site){
     site = 'https://www.' + site;
   }
 
-  sites.push(site);
-  localStorage.setItem("sites", JSON.stringify(sites));
-  console.log(site);
-  printSite(site);
-  delete_sitte_button();
+  if (!urlIconMap.hasOwnProperty(site)) {
+  
+    fetchIcon(site, function(icon) {
+
+      urlIconMap[site] = icon;
+      localStorage.setItem("icons", JSON.stringify(urlIconMap));
+
+    });
+  }
+      sites.push(site);
+      console.log("Added:  "+site);
+      localStorage.setItem("sites", JSON.stringify(sites));
+      printSite(site);
+      delete_sitte_button(); 
+  
+
+ 
 }
 
 function deleteSite(index){
@@ -162,6 +183,7 @@ function deleteSite(index){
   }
 
   localStorage.setItem("sites", JSON.stringify(sites));
+  localStorage.setItem("icons", JSON.stringify(urlIconMap));
   refreshSites();
 }
 
@@ -181,7 +203,10 @@ function printSite(site){
   }
 
   if(site_icon){
-    site_icon = "/img/" + site_icon + ".png";
+   
+    if(!site_icon.startsWith("https://") && !site_icon.startsWith("http://") && !site_icon.startsWith("www.")){
+      site_icon = "/img/" + site_icon + ".png";
+    }
     a = d.createElement("a");
     div = d.createElement("div");
     a.href = site;
@@ -254,7 +279,7 @@ function printSite(site){
 
 
       $(".most_visited").append(div);
-      
+
 
       delete_sitte_button();
 

@@ -7,7 +7,7 @@ var default_sites = [
   "https://www.github.com",
 ]
 
-var urlIconMap = {
+var default_icons = {
   "https://www.facebook.com": "fb",
   "https://www.plus.google.com": "gp",
   "https://www.youtube.com": "yt",
