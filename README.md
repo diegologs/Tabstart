@@ -7,4 +7,5 @@ default sites you can add or delete the sites whenever you want. It also shows b
 
 ![Tabstart screenshot](https://i.imgur.com/LEPDYM2.jpg)
 
+<a href="changelog.md">CHANGELOG</a>
 <a href="credits.md">CREDITS</a>
