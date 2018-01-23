@@ -1,35 +1,34 @@
-body{
-  background-color: rgba(0,0,0,0.8);
+body {
+  background-color: rgba(0, 0, 0, 0.8);
   color: white;
 }
 
-.bg{
+.bg {
   height: 100vh;
   background-size: cover;
   background-position: center;
 }
 
-#colorpad{
+#colorpad {
   margin: 0px auto;
 }
 
-.first_letter{
+.first_letter {
   padding-top: 12px;
   font-weight: bold;
   font-size: 4em;
 }
 
-.github{
+.github {
   display: none;
   position: absolute;
   bottom: 4%;
   right: 5%;
   z-index: 100;
   color: white;
-
 }
 
-.author{
+.author {
   display: none;
   position: absolute;
   bottom: 9%;
@@ -38,11 +37,16 @@ body{
   color: white;
 }
 
-.github i{
+a:hover {
+  color: plum;
+  text-decoration: none;
+}
+
+.github i {
   padding-left: 8px;
 }
 
-.settings_title{
+.settings_title {
   display: none;
   position: absolute;
   top: 5%;
@@ -50,7 +54,7 @@ body{
   z-index: 100;
 }
 
-.default_settings{
+.default_settings {
   display: none;
   position: absolute;
   bottom: 5%;
@@ -58,91 +62,95 @@ body{
   z-index: 100;
 }
 
+.default_settings:hover {
+  cursor: pointer;
+  color: plum;
+}
+
 #overlay {
-  background-color: rgba(0,0,0,0.75);
-  position:fixed;
-  left:0;
+  background-color: rgba(0, 0, 0, 0.75);
+  position: fixed;
+  left: 0;
   top: 0;
-  width:100%;
-  height:100%;
+  width: 100%;
+  height: 100%;
   display: none;
 }
 
-.content{
-
-    background: rgb(0, 0, 0);
-    transition: background 0.6s linear;
-    -webkit-transition: background 0.6s linear;
-    height: 100vh;
-    width: 100%;
-    padding-left: 30px;
-    padding-right: 30px;
-
+.content {
+  background: rgb(0, 0, 0);
+  transition: background 0.6s linear;
+  -webkit-transition: background 0.6s linear;
+  height: 100vh;
+  width: 100%;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
-.link{
+.link {
   font-weight: bold;
   color: white;
   margin-top: 10px;
 }
 
-.most_visited{
+.most_visited {
   padding-top: 6%;
-  
   text-align: center;
 }
 
-.site{
+.site {
   margin-top: 40px;
 }
 
-
-.fa-sliders{
-  
+.fa-sliders {
   font-size: 1.5em;
-
 }
 
-.row{
+.row {
   margin: 0px;
-
 }
 
-.settings{
+.settings {
   text-align: right;
   padding: 10px;
   padding-right: 30px;
   padding-top: 30px;
-
 }
 
-.addSite{
+.addSite {
   display: none;
 }
 
-.center{
+.center {
   position: relative;
   margin: 0px auto;
   text-align: center;
 }
 
-#clock{
+#clock {
   text-align: center;
   font-weight: 500;
   padding-top: 40px;
   font-size: 4em;
 }
 
-.addSite{
-  margin-top: 30px;
-
+.addSite {
+  margin-top: 50px;
 }
 
-.add_site{
+.addSite i:hover {
+  color: plum;
+}
+
+.addSite h5 {
+  margin-bottom: 18px;
+}
+
+.add_site {
   margin-top: 15px;
 }
 
-.fa-trash{
+.fa-trash {
   color: red;
   position: absolute;
   left: 50%;
@@ -150,4 +158,11 @@ body{
   margin-top: 10px;
 }
 
+.fa-trash:hover {
+  cursor: pointer;
+  color: darkred;
+}
 
+.fa-sliders {
+  cursor: pointer;
+}

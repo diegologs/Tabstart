@@ -3,7 +3,7 @@ $(document).ready(function () {
   startTime();
   getWallpaper();
 
-  getStoredSites(function(){
+  getStoredSites(function () {
     printSites();
   });
 
@@ -21,7 +21,7 @@ var sites = default_sites.slice();
 
 var urlIconMap = jQuery.extend(true, {}, default_icons);
 
-String.prototype.getPureDomain = function() {
+String.prototype.getPureDomain = function () {
   var temp = document.createElement("a")
   temp.href = this
 
@@ -31,27 +31,29 @@ String.prototype.getPureDomain = function() {
   return val
 }
 
-var xhr = function(url, callback) {
+var xhr = function (url, callback) {
   var oReq = new XMLHttpRequest()
-  oReq.onload = function() {
+  oReq.onload = function () {
     var response = this.responseText
     callback(response)
   }
-  oReq.onerror = function(e) {
-  }
+  oReq.onerror = function (e) {}
   oReq.open("get", url, true)
   oReq.send()
 }
 
-function getStoredSites(callback){
+
+// Gets the sites stored in the localStorage
+
+function getStoredSites(callback) {
   var stored_sites = JSON.parse(localStorage.getItem("sites"));
   var stored_icons = JSON.parse(localStorage.getItem("icons"));
 
-  if (stored_sites){
+  if (stored_sites) {
     sites = stored_sites;
   }
 
-  if (stored_icons){
+  if (stored_icons) {
     urlIconMap = stored_icons;
   }
 
@@ -62,22 +64,22 @@ function getStoredSites(callback){
 
 }
 
-function add_site_button(){
+function add_site_button() {
 
-  $(".add_site").bind("click", function(e) {
-    var site = $("#add_site_input").val(); 
+  $(".add_site").bind("click", function (e) {
+    var site = $("#add_site_input").val();
     addSite(site);
 
   })
 }
 
 
-function default_site_button(){
+function default_site_button() {
 
-  $(".default_settings").bind("click", function(e) {
-    console.log("Reseting to default settings...."); 
+  $(".default_settings").bind("click", function (e) {
+    console.log("Reseting to default settings....");
     sites = default_sites.slice();
-     
+
     urlIconMap = jQuery.extend(true, {}, default_icons);
     refreshSites();
     localStorage.setItem("sites", JSON.stringify(sites));
@@ -88,11 +90,11 @@ function default_site_button(){
 }
 
 
-function delete_sitte_button(){
+function delete_sitte_button() {
 
   var delete_button = document.getElementsByClassName("fa-trash");
   for (i = 0; i < delete_button.length; i++) {
-    delete_button[i].onclick = function(e) {
+    delete_button[i].onclick = function (e) {
       var index = e.target.id;
       deleteSite(index);
       delete_sitte_button();
@@ -100,9 +102,9 @@ function delete_sitte_button(){
   }
 }
 
-function settings_button(){
+function settings_button() {
 
-  $(".settings_icon").bind("click", function(e) {
+  $(".settings_icon").bind("click", function (e) {
     $(".addSite").toggle();
     $("#overlay").toggle();
     $(".settings_title").toggle();
@@ -111,9 +113,9 @@ function settings_button(){
     $(".author").toggle();
     $(".github").toggle();
 
-    if (settings){
+    if (settings) {
       settings = false;
-    }else{
+    } else {
       settings = true;
 
     }
@@ -135,63 +137,62 @@ function startTime() {
 function checkTime(i) {
   if (i < 10) {
     i = "0" + i
-  }; 
+  };
   return i;
 }
 
-function addSite(site){
+function addSite(site) {
 
   var icon_aux;
 
-  if (site.startsWith("http://")){
+  if (site.startsWith("http://")) {
     site = site.slice(7);
   }
 
-  if (site.startsWith("https://")){
+  if (site.startsWith("https://")) {
     site = site.slice(8);
   }
 
-  if (site.startsWith("www.")){
+  if (site.startsWith("www.")) {
     site = site.slice(4);
   }
 
-  if (!site.startsWith("www.") && !site.startsWith("https://"))
-  {
+  if (!site.startsWith("www.") && !site.startsWith("https://")) {
     site = 'https://www.' + site;
   }
 
   if (!urlIconMap.hasOwnProperty(site)) {
-  
-    fetchIcon(site, function(icon_aux) {
-     
+
+    fetchIcon(site, function (icon_aux) {
+
       console.log(icon_aux);
 
-     
-     urlIconMap[site] = icon_aux;
-     localStorage.setItem("icons", JSON.stringify(urlIconMap));
-     refreshSites();
+
+      urlIconMap[site] = icon_aux;
+      localStorage.setItem("icons", JSON.stringify(urlIconMap));
+      refreshSites();
 
     });
   }
-   
-  
-    if (!icon_aux){
-        
-         urlIconMap[site] = getIcon(site); 
-         localStorage.setItem("icons", JSON.stringify(urlIconMap)); 
-      }
-      
-      sites.push(site);
-      console.log("Added:  "+site);
-      localStorage.setItem("sites", JSON.stringify(sites));
-      printSite(site);
-      delete_sitte_button(); 
-  
 
- 
+
+  if (!icon_aux) {
+
+    urlIconMap[site] = getIcon(site);
+    localStorage.setItem("icons", JSON.stringify(urlIconMap));
+  }
+
+  sites.push(site);
+  console.log("Added:  " + site);
+  localStorage.setItem("sites", JSON.stringify(sites));
+  printSite(site);
+  delete_sitte_button();
+
+
+
 }
 
-function deleteSite(index){
+function deleteSite(index) {
   if (index > -1) {
     sites.splice(index, 1);
   }
@@ -201,7 +202,7 @@ function deleteSite(index){
   refreshSites();
 }
 
-function printSite(site){
+function printSite(site) {
   var site_icon;
   var d = document;
   var a;
@@ -216,9 +217,9 @@ function printSite(site){
     site_icon = urlIconMap[site]
   }
 
-  if(site_icon){
-   
-    if(!site_icon.startsWith("https://") && !site_icon.startsWith("http://") && !site_icon.startsWith("www.")){
+  if (site_icon) {
+
+    if (!site_icon.startsWith("https://") && !site_icon.startsWith("http://") && !site_icon.startsWith("www.")) {
       site_icon = "/img/" + site_icon + ".png";
     }
     a = d.createElement("a");
@@ -239,14 +240,14 @@ function printSite(site){
     index = sites.indexOf(site);
     trash.setAttribute('id', index);
 
-    if(settings){
+    if (settings) {
       trash.style.display = 'inline';
-    }else{
+    } else {
 
       trash.style.display = 'none';
     }
 
-    trash.setAttribute("aria-hidden", "true");  
+    trash.setAttribute("aria-hidden", "true");
 
     a.appendChild(img);
     div.appendChild(a);
@@ -254,11 +255,9 @@ function printSite(site){
 
 
     $(".most_visited").append(div);
-  }
+  } else {
 
-  else{
-
-    fetchIcon(site, function(icon) {
+    fetchIcon(site, function (icon) {
       site_icon = icon;
       a = d.createElement("a");
       div = d.createElement("div");
@@ -279,13 +278,13 @@ function printSite(site){
       trash.setAttribute('id', index);
 
 
-      if(settings){
+      if (settings) {
         trash.style.display = 'inline';
-      }else{
+      } else {
 
         trash.style.display = 'none';
       }
-      trash.setAttribute("aria-hidden", "true");  
+      trash.setAttribute("aria-hidden", "true");
 
       a.appendChild(img);
       div.appendChild(a);
@@ -302,15 +301,15 @@ function printSite(site){
 
 }
 
-function printSites(){
-  sites.forEach(function(site){
+function printSites() {
+  sites.forEach(function (site) {
     printSite(site);
   });
 
 
 }
 
-function refreshSites(){
+function refreshSites() {
 
   $(".most_visited").empty();
   printSites();
@@ -318,12 +317,12 @@ function refreshSites(){
 
 }
 
-function getIcon(site){
-    return "https://logo.clearbit.com/" + site + "?s=200"
+function getIcon(site) {
+  return "https://logo.clearbit.com/" + site + "?s=200"
 }
 
 
-function getWallpaper(){
+function getWallpaper() {
 
   $.get("https://www.reddit.com/r/wallpaper/top/.json?count=2?sort=new", function (json) {
     var image = json.data.children[0].data.url;
@@ -350,7 +349,9 @@ function getRandomColor() {
 function delete_top_site(url_to_delete) {
 
   console.log(url_to_delete);
-  chrome.history.deleteUrl({url: url_to_delete});
+  chrome.history.deleteUrl({
+    url: url_to_delete
+  });
 
 }
 
@@ -368,20 +369,20 @@ function fetchIcon(url, _callback) {
   if (presetMatchedId) {
     console.log(presetMatchedId);
   } else {
-    xhr(url, function(r) {
+    xhr(url, function (r) {
       parser = new DOMParser()
       doc = parser.parseFromString(r, "text/html")
 
       var icon = URI("favicon.ico").absoluteTo(url).toString()
       var linkTags = doc.getElementsByTagName("link")
-      var icons = [].slice.call(linkTags).filter(function(tag) {
+      var icons = [].slice.call(linkTags).filter(function (tag) {
         var attrRel = tag.getAttribute("rel")
         return attrRel === "apple-touch-icon-precomposed" || attrRel === "apple-touch-icon" || attrRel === "shortcut icon" || attrRel === "icon"
       })
 
       var sizePreference = ["57x57", "60x60", "72x72", "76x76", "96x96", "114x114", "120x120", "144x144", "152x152", "180x180", "192x192"]
 
-      icons.sort(function(a, b) {
+      icons.sort(function (a, b) {
         var sizeA = a.getAttribute("sizes")
         var sizeB = b.getAttribute("sizes")
         if (sizePreference.indexOf(sizeA) > sizePreference.indexOf(sizeB)) return -1
@@ -403,7 +404,7 @@ function fetchIcon(url, _callback) {
 }
 
 
-String.prototype.getPureDomain = function() {
+String.prototype.getPureDomain = function () {
   var temp = document.createElement("a")
   temp.href = this
 
