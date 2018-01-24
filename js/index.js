@@ -161,7 +161,14 @@ function addSite(site) {
     site = 'https://www.' + site;
   }
 
-  if (!urlIconMap.hasOwnProperty(site)) {
+
+  if (urlIconMap.hasOwnProperty(site)) {
+  
+    icon_aux = urlIconMap[site]
+
+  }
+
+  else {
 
     fetchIcon(site, function (icon_aux) {
 
