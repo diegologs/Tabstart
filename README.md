@@ -1,4 +1,4 @@
-# <img src="img/logo.png" width="24" height="24" alt="Tabstart"> Tabstart
+# <img src="logo.png" width="24" height="24" alt="Tabstart"> Tabstart
 
 ### A new tab replacement
 
