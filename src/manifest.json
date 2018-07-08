@@ -9,8 +9,11 @@
   },
   "browser_action": {
     "default_title": "tabstart",
-    "default_popup": "popup/popup.html"
+    "default_popup": "index.html"
   },
+   "chrome_url_overrides": {
+      "newtab": "index.html"
+    },
   "background": {
     "scripts": [
       "background.js"

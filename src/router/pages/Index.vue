@@ -1,17 +1,22 @@
 <template>
-  <p>Hello world!</p>
+  <p>aaaaa</p>
 </template>
 
 <script>
+
 export default {
-  data () {
-    return {}
-  }
-}
+    data() {
+       
+    },
+
+    mounted() {
+     
+    }
+};
 </script>
 
 <style lang="scss" scoped>
 p {
-  font-size: 20px;
+    font-size: 20px;
 }
 </style>
