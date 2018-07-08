@@ -1,17 +1,42 @@
 <template>
-  <p>aaaaa</p>
+	<p>{{h + ':' + m + ':' + s}}</p>
 </template>
 
 <script>
-
 export default {
     data() {
-       
+        return {
+            today: new Date(),
+            h: "",
+            m: "",
+            s: ""
+        };
     },
 
-    mounted() {
-     
-    }
+    methods: {
+        startTime() {
+            this.today = new Date();
+            this.h = this.today.getHours();
+            this.m = this.today.getMinutes();
+            this.s = this.today.getSeconds();
+            this.m = this.checkTime(this.m);
+            this.s = this.checkTime(this.s);
+        },
+
+        checkTime(i) {
+            if (i < 10) {
+                i = "0" + i;
+            }
+            return i;
+        }
+    },
+
+    created() {
+        this.startTime();
+        setInterval(() => this.startTime(), 1 * 1000);
+    },
+
+    mounted() {}
 };
 </script>
 
