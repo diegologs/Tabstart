@@ -1,6 +1,7 @@
 <template>
     <div class="center timer">
 	    <timer></timer>
+	    <sites></sites>
     </div>
 </template>
 
