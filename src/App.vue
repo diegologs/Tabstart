@@ -47,6 +47,11 @@ export default {
     padding: 0;
 }
 
+.center{
+    margin: 0px auto;
+    text-align: center;
+}
+
 
 
 </style>
