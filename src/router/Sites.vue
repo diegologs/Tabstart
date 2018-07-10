@@ -1,7 +1,9 @@
 <template>
 	<div class="row">
 		<ul>
-			<li v-for="site in sites" :key="site.name">{{site.name}}</li>
+			<li v-for="site in sites" :key="site.name">{{site.name}}
+                <img v-bind:src="site.icon" width="40px">
+            </li>
 		</ul>
 	</div>
 </template>
@@ -19,6 +21,7 @@ export default {
     mounted() {
 
         const sites_provider = new SitesProvider();
+        sites_provider.clearSites();
         this.sites = sites_provider.getSites();
     }
 };
