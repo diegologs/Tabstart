@@ -2,7 +2,7 @@
     <div class="row">
         <ul class="sites_list">
             <li v-for="site in sites" :key="site.name" class="site">
-                <img v-bind:src="site.icon" class="site_icon">
+               <a :href="site.name"><img v-bind:src="site.icon" class="site_icon"></a>
             </li>
         </ul>
     </div>
@@ -33,7 +33,6 @@ export default {
     margin: 0px auto;
     grid-template-columns: repeat(6, 1fr);
     justify-content: center;
-    margin-top: 20px;
 }
 
 .sites_list {

@@ -24,7 +24,7 @@ export default {
                 this.wallpaper = res.data.data.children[0].data.url;
 
                 this.bg_image =
-                    "linear-gradient( rgba(0, 5, 30, 0.75), rgba(15, 19, 30, 0.25)), url(" +
+                    "linear-gradient( rgba(0, 5, 30, 0.65), rgba(15, 19, 30, 0.25)), url(" +
                     this.wallpaper +
                     ")";
                 console.log(this.bg_image);
@@ -50,6 +50,14 @@ export default {
 .center{
     margin: 0px auto;
     text-align: center;
+}
+
+a{
+    text-decoration: none;
+}
+
+a:focus {
+  outline: none;
 }
 
 

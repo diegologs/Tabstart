@@ -1,5 +1,5 @@
 <template>
-	<p>{{h + ':' + m + ':' + s}}</p>
+	<h1 class="clock">{{h + ':' + m + ':' + s}}</h1>
 </template>
 
 <script>
@@ -41,9 +41,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-p {
+.clock {
     margin: 0px;
-    padding: 0px;
     font-size: 2.5em;
     font-weight: bold;
 }
