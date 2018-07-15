@@ -1,5 +1,5 @@
 import PageIndex from '../app/pages/Index'
-import PageSettings from '../app/pages/Settings'
+import PageSettings from '../app/pages/Settings/Settings'
 
 export default [
   {

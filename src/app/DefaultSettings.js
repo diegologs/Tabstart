@@ -22,5 +22,5 @@ export const default_sites = [
   {
     name: "https://www.github.com",
     icon: "/icons/gh.png"
-  },
+  }
 ]

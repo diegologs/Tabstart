@@ -1,18 +1,23 @@
-import { default_sites } from './DefaultSettings'
+import {
+    default_sites
+} from './DefaultSettings'
 
 export default class SitesProvider {
 
-
-
     constructor() {
-        let stored_sites = JSON.parse(localStorage.getItem('sites'));
 
-        if (stored_sites !== null && stored_sites.length !== 0) {
-            console.log(stored_sites);
-            
-            this.sites = stored_sites;
+        this.stored_sites = JSON.parse(localStorage.getItem('sites'));
+        console.log(JSON.parse(localStorage.getItem('sites')));
+
+        if (this.stored_sites && this.stored_sites.length !== 0) {
+
+            this.sites = this.default_sites;
+
         } else {
+
             this.sites = default_sites;
+            localStorage.setItem('sites', JSON.stringify(default_sites));
+
         }
     }
 
@@ -25,8 +30,17 @@ export default class SitesProvider {
         localStorage.setItem('sites', JSON.stringify(this.sites));
     }
 
-    clearSites(){
+    clearSites() {
         localStorage.setItem('sites', JSON.stringify([]));
+    }
+
+    deleteSite(site) {
+
+        const index = this.sites.indexOf(site);
+        this.sites.splice(index, 1);
+        localStorage.setItem('sites', JSON.stringify(this.sites));
+
+
     }
 
 

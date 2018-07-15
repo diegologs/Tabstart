@@ -2,7 +2,8 @@
     <div class="row">
         <ul class="sites_list">
             <li v-for="site in sites" :key="site.name" class="site">
-               <a :href="site.name"><img v-bind:src="site.icon" class="site_icon"></a>
+                <a :href="site.name"><img v-bind:src="site.icon" class="site_icon"></a>
+                <div v-if="displaySettings" class="trash"><i @click="deleteSite(site)" class="far fa-trash-alt"></i></div>
             </li>
         </ul>
     </div>
@@ -11,7 +12,14 @@
 <script>
 import SitesProvider from "./SitesProvider";
 
+const sites_provider = new SitesProvider();
+
 export default {
+
+    props: {
+        displaySettings: Boolean
+    },
+
     data() {
         return {
             sites: []
@@ -19,9 +27,14 @@ export default {
     },
 
     mounted() {
-        const sites_provider = new SitesProvider();
         sites_provider.clearSites();
         this.sites = sites_provider.getSites();
+    },
+
+    methods: {
+        deleteSite(site) {
+            sites_provider.deleteSite(site);
+        }
     }
 };
 </script>
@@ -29,7 +42,7 @@ export default {
 <style>
 .sites_list {
     display: inline-grid;
-    width: 920px;
+    width: 45%;
     margin: 0px auto;
     grid-template-columns: repeat(6, 1fr);
     justify-content: center;
@@ -40,8 +53,16 @@ export default {
 }
 
 .site_icon {
-     width: 68%;
+    width: 68%;
     height: auto;
+}
+
+.trash{
+    color: red;
+    width: 68%;
+    font-size: 0.7em;
+    text-align: center;
+    margin-top: 5px;
 }
 
 @media (max-width: 1000px) {

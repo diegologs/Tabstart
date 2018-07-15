@@ -1,5 +1,5 @@
 <template>
-	<div class="bg" v-bind:style="{ background: bg_image}">
+	<div class="bg" v-bind:style="{ background: bg_image}" style="background-size: cover;">
 		<router-view></router-view>
 	</div>
 </template>
@@ -38,7 +38,7 @@ export default {
     font-size: 20px;
     color: white;
     height: 100vh;
-    background-size: cover;
+    background-size: cover !important;
     background-position: center;
 }
 
