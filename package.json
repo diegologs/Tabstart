@@ -8,12 +8,14 @@
     "build:dev": "cross-env NODE_ENV=development webpack --hide-modules",
     "build-zip": "node scripts/build-zip.js",
     "watch": "npm run build -- --watch",
-    "watch:dev": "cross-env HMR=true npm run build:dev -- --watch"
+    "watch:dev": "cross-env HMR=true npm run build:dev -- --watch",
+    "serve": "vue-cli-service serve"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "vue": "^2.5.13",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.51",

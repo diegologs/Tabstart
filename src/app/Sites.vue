@@ -3,37 +3,36 @@
         <ul class="sites_list">
             <li v-for="site in sites" :key="site.name" class="site">
                 <a :href="site.name"><img v-bind:src="site.icon" class="site_icon"></a>
-                <div v-if="displaySettings" class="trash"><i @click="deleteSite(site)" class="far fa-trash-alt"></i></div>
+                <div v-if="displaySettings" class="trash">
+                    <i @click="deleteSite(site)" class="far fa-trash-alt"></i>
+                </div>
             </li>
         </ul>
     </div>
 </template>
 
 <script>
-import SitesProvider from "./SitesProvider";
-
-const sites_provider = new SitesProvider();
 
 export default {
-
     props: {
         displaySettings: Boolean
     },
 
-    data() {
-        return {
-            sites: []
-        };
+    computed: {
+        sites() {
+            return this.$store.state.sites;
+        }
     },
 
-    mounted() {
-        sites_provider.clearSites();
-        this.sites = sites_provider.getSites();
+    data() {
+        return {};
     },
+
+    mounted() {},
 
     methods: {
         deleteSite(site) {
-            sites_provider.deleteSite(site);
+            this.$store.commit("delete_site", site);
         }
     }
 };
@@ -57,7 +56,7 @@ export default {
     height: auto;
 }
 
-.trash{
+.trash {
     color: red;
     width: 68%;
     font-size: 0.7em;

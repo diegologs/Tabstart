@@ -15,18 +15,18 @@
 
             <div class="modal_content">
                 <label for="#add_site_input">Site name</label><br>
-                <input type="text" id="add_site_input" class=" input add_site_input" placeholder="Site name">
+                <input type="text" v-model="name" id="add_site_input" class=" input add_site_input" placeholder="Site name (URL)">
                 <br>
                 <label for="#add_icon_input" class="icon_label">Icon URL (optional)</label><br>
                 <input type="text" v-model="icon" id="add_icon_input" class=" input add_icon_input" placeholder="Icon URL">
 
                 <div class="icon_container">
-                    <img :src="icon" alt="" class="icon"> 
+                    <img :src="getIcon()" alt="" class="icon">
                 </div>
             </div>
 
             <div class="modal_footer">
-                <button class="add_site_button_modal">Add site</button>
+                <button class="add_site_button_modal" @click="addSite()">Add site</button>
             </div>
         </div>
 
@@ -37,12 +37,27 @@
 </template>
 
 <script>
+
 export default {
     data() {
         return {
             showModal: false,
-            icon: ""
+            icon: "",
+            name: ""
         };
+    },
+
+    methods: {
+        getIcon() {
+            return this.icon !== ""
+                ? this.icon
+                : "https://logo.clearbit.com/" + this.name;
+        },
+
+        addSite() {
+            this.$store.commit("add_site", { name: this.name, icon: this.getIcon() });
+            this.showModal = false;
+        }
     }
 };
 </script>
@@ -146,13 +161,13 @@ h3 {
     border: 2px solid rgb(2, 169, 190);
 }
 
-.icon_container{
+.icon_container {
     margin: 0px auto;
     text-align: center;
     margin-top: 30px;
 }
 
-.icon{
+.icon {
     max-width: 100px;
 }
 
