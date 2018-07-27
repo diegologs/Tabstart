@@ -6,7 +6,7 @@ import {default_sites} from '../app/DefaultSettings'
 Vue.use(Vuex)
 
 const state = {
-    sites: JSON.parse(localStorage.getItem('sites'))
+    sites: JSON.parse(localStorage.getItem('sites')) ? JSON.parse(localStorage.getItem('sites')) : default_sites
 }
 
 const mutations = {
