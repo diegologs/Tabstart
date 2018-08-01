@@ -62,6 +62,11 @@ export default {
     font-size: 0.7em;
     text-align: center;
     margin-top: 5px;
+    cursor: pointer;
+}
+
+.trash :hover{
+    color: rgba(255,255,255,1);
 }
 
 @media (max-width: 1000px) {
