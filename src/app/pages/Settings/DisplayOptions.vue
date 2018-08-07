@@ -1,7 +1,7 @@
 <template>
     <div class="display_options">
         <input type="checkbox" value="displaySites" class="checkbox" v-model="display_sites" @click="sitesHandler()"> Display sites<br>
-        <input type="checkbox" value="displayClock" class="checkbox" v-model="display_clock" @click="clockHandler()"> Display clock {{displayClock}}<br>
+        <input type="checkbox" value="displayClock" class="checkbox" v-model="display_clock" @click="clockHandler()"> Display clock<br>
     </div>
 </template>
 
@@ -31,7 +31,6 @@ export default {
 
         clockHandler() {
             this.display_clock = !this.display_clock;
-            console.log(this.display_clock);
             this.save();
         }
     },

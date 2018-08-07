@@ -3,7 +3,6 @@
         <sites class="settings_sites" :displaySettings="true" />
         <div class="buttons_container">
             <button class="add_site_button" @click="showModal = !showModal">Add site</button>
-            <button class="add_site_button">Reorder sites</button>
         </div>
 
         <div v-if="showModal" class="modal">
@@ -87,12 +86,12 @@ h3 {
     background: transparent;
     border: 2px solid aqua;
     color: aqua;
-    margin: 1% 0 1% 1.6%;
+    margin: 5% 0 1% 1.6%;
     cursor: pointer;
 }
 
 .add_site_button:hover {
-    background: rgb(151, 223, 223);
+    background: aqua;
     color: black;
 }
 

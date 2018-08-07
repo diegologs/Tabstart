@@ -1,5 +1,5 @@
 <template>
-	<h1 v-if="display_clock" class="clock">{{h + ':' + m + ':' + s}}</h1>
+	<h1 class="clock">{{h + ':' + m + ':' + s}}</h1>
 </template>
 
 <script>
@@ -10,7 +10,6 @@ export default {
             h: "",
             m: "",
             s: "",
-            display_clock: Boolean
         };
     },
 
@@ -35,14 +34,7 @@ export default {
     created() {
         this.startTime();
         setInterval(() => this.startTime(), 1 * 1000);
-    },
-
-    mounted() {
-        typeof this.$store.state.options.display_clock !== "undefined" ? this.display_clock = this.$store.state.options.display_clock : this.display_clock = true;
-        console.log(this.display_clock);
-
-        
-    }
+    }    
 };
 </script>
 
