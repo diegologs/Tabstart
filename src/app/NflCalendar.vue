@@ -1,7 +1,7 @@
 <template>
     <div class="nfl-calendar">
         <div>
-            <span>Week {{week}}, </span>
+            <span v-if="type !== 'SB'">Week {{week}}, </span>
             <span>{{getTypeName}} </span>
             <span>{{year}}</span>
         </div>
@@ -34,8 +34,8 @@ export default {
       data: null,
       scores: null,
       week: 1,
-      type: "PRE",
-      year: 2018
+      type: "POST",
+      year: 2017
     };
   },
   methods: {
@@ -61,20 +61,55 @@ export default {
 
     nextScores() {
       this.week++;
-      if (this.week > 4 && this.type == "PRE") {
+      if (this.week > 4 && this.type === "PRE") {
         this.week = 1;
         this.type = "REG";
       }
-      this.fetchScores(new Date().getFullYear(), this.week, this.type);
+
+      if (this.week > 17 && this.type === "REG") {
+        this.week = 1;
+        this.type = "POST";
+      }
+
+      if (this.week > 4 && this.type === "POST") {
+        this.week = 1;
+        this.type = "SB";
+      }
+
+      if (this.type === "SB") {
+        this.year = this.year ++;
+        this.week = 1;
+        this.type = "PRE";
+      }
+
+      this.fetchScores(this.year, this.week, this.type);
     },
 
     prevScores() {
       this.week--;
       if (this.week < 1 && this.type == "REG") {
-        this.week = 1;
+        this.week = 4;
         this.type = "PRE";
       }
-      this.fetchScores(new Date().getFullYear(), this.week, this.type);
+
+      if (this.week < 1 && this.type === "POST") {
+        this.week = 17;
+        this.type = "REG";
+      }
+
+      if (this.type === "SB") {
+        this.week = 4;
+        this.type = "POST";
+      }
+
+       if (this.week < 1 && this.type === "PRE") {
+        this.year = this.year - 1;
+        console.log(this.year);
+        
+        this.week = 1;
+        this.type = "SB";
+      }
+      this.fetchScores(this.year, this.week, this.type);
     }
   },
   computed: {
@@ -84,11 +119,17 @@ export default {
           return "Preseason";
         case "REG":
           return "Regular season";
+        case "POST":
+          return "Playoffs";
+        case "PRO":
+          return "Probowl";
+        case "SB":
+          return "Superbowl";
       }
     }
   },
   created() {
-    this.fetchScores(new Date().getFullYear(), this.week, this.type);
+    this.fetchScores(this.year, this.week, this.type);
   }
 };
 </script>
@@ -123,8 +164,8 @@ export default {
   padding-top: 40px;
   text-align: center;
   cursor: pointer;
-  &:hover{
-      background-color: rgba(255, 255, 255, 0.1);
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
   }
 }
 
