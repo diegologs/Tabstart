@@ -9,7 +9,8 @@ const state = {
     sites: JSON.parse(localStorage.getItem('sites')) ? JSON.parse(localStorage.getItem('sites')) : default_sites,
     options: {
         display_sites: JSON.parse(localStorage.getItem('options')) ? JSON.parse(localStorage.getItem('options')).display_sites : true,
-        display_clock: JSON.parse(localStorage.getItem('options')) ? JSON.parse(localStorage.getItem('options')).display_clock : true
+        display_clock: JSON.parse(localStorage.getItem('options')) ? JSON.parse(localStorage.getItem('options')).display_clock : true,
+        display_nfl: JSON.parse(localStorage.getItem('options')) ? JSON.parse(localStorage.getItem('options')).display_nfl : true
     }
 }
 
