@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import routes from './routes'
 import Timer from '../app/Timer.vue'
 import Sites from '../app/Sites.vue'
-import NflCalendar from '../app/NflCalendar.vue'
+import NflCalendar from '../app/NFL/NflCalendar.vue'
 
 import AddSites from '../app/pages/Settings/AddSites'
 import DisplayOptions from '../app/pages/Settings/DisplayOptions'
