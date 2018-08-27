@@ -5,6 +5,7 @@
         </router-link>
         <timer v-if="display_clock" class="timer"></timer>
         <sites v-if="display_sites" class="sites"></sites>
+        <nfl-calendar class="nfl"></nfl-calendar>
     </div>
 </template>
 
